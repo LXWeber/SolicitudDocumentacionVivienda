@@ -1,0 +1,99 @@
+html{
+    font-size: 15px;
+}
+
+
+body {
+    background-color: rgb(30, 30, 30);
+    font-family: dosis;
+    color: #fff;
+}
+
+.header{
+    background: linear-gradient(to left, rgba(67,23,90,1) 0%, rgba(187,0,94,1) 49%, rgba(187,0,94,1) 52%, rgba(215,140,0,1) 100%) !important;
+    
+}
+
+#imgviv {width: auto;}
+#imggob {width: auto;}
+
+.instrucciones {
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.text-secondary {
+    color:rgba(215,140,0,1)!important;
+}
+
+.text-primary {
+    color:rgba(67,23,90,1)!important;
+}
+
+a {
+    color: rgba(187,0,94,1);
+    text-decoration: none;
+    background-color: transparent;
+    padding: 0.75rem 1.25rem;
+}
+
+a.text-primary:focus, a.text-primary:hover {
+    color: rgba(67,23,90,1)!important;
+}
+
+.bg-primary {
+    background-color: rgba(215,140,0,1)!important;
+}
+
+.btn-primary{
+    background-color: rgba(187,0,94,1);
+    border-color: rgba(215,140,0,1);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    background-color: rgba(67,23,90,1);
+    border-color: rgba(215,140,0,1);
+}
+
+.btn-outline-primary {
+    color: rgba(67,23,90,1);
+    border-color: rgba(67,23,90,1);
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: rgba(67,23,90,1);
+    border-color: rgba(67,23,90,1);
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: rgba(67,23,90,1);
+    border-color: rgba(67,23,90,1);
+}
+
+
+.card {
+    background-color: #bd08590f!important;
+    border: 1px solid rgb(73, 22, 90)!important;
+}
+
+.card-header {
+    padding: 0;
+}
+
+.card-header:hover {
+    background-color: #aa095186!important;
+}
+
+a:hover {
+    color: white;
+}
+
+footer{
+    background: linear-gradient(to left, rgba(67,23,90,1) 0%, rgba(187,0,94,1) 49%, rgba(187,0,94,1) 52%, rgba(215,140,0,1) 100%) !important;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px; } }
