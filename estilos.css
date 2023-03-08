@@ -2,16 +2,14 @@ html{
     font-size: 15px;
 }
 
-
 body {
     background-color: rgb(30, 30, 30);
     font-family: dosis;
     color: #fff;
 }
 
-.header{
+.backgroundColorSL{
     background: linear-gradient(to left, rgba(67,23,90,1) 0%, rgba(187,0,94,1) 49%, rgba(187,0,94,1) 52%, rgba(215,140,0,1) 100%) !important;
-    
 }
 
 #imgviv {width: auto;}
@@ -72,7 +70,6 @@ a.text-primary:focus, a.text-primary:hover {
     border-color: rgba(67,23,90,1);
 }
 
-
 .card {
     background-color: #bd08590f!important;
     border: 1px solid rgb(73, 22, 90)!important;
@@ -90,10 +87,6 @@ a:hover {
     color: white;
 }
 
-footer{
-    background: linear-gradient(to left, rgba(67,23,90,1) 0%, rgba(187,0,94,1) 49%, rgba(187,0,94,1) 52%, rgba(215,140,0,1) 100%) !important;
-}
-
 @media (min-width: 768px) {
-  html {
+    html {
     font-size: 16px; } }
