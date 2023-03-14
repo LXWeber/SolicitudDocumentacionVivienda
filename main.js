@@ -1,10 +1,58 @@
 const   formulario = document.getElementById('formulario');
+const   inputs = document.querySelectorAll('#formulario input');
 const   newIntegrante = document.getElementById("btnAgregarIntegrante");
-const familiares = document.getElementById("familiares");
+const   familiares = document.getElementById("familiares");
+
+const regex = {
+	nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
+    dni: /^\d{7,9}$/}
+
+const campos = {
+	nombre: false,
+	dni: false
+}
+
+const validarDatos = (e) => {
+    console.log("Entra a validarDatos");
+	switch (e.target.name) {
+		case "nombre":
+            console.log("Entra a validarDatos case nombre");
+			validarCampo(regex.nombre, e.target, e.target.name);
+		break;
+		case "dni":
+            console.log("Entra a validarDatos case dni");
+            validarCampo(regex.dni, e.target, e.target.name);
+        break;
+	}
+}
+
+const validarCampo = (expresion, input, campo) => {
+    console.log("Entra a validarCampo");
+	if(expresion.test(input.value)){
+    console.log("Entra a validarCampo if");
+		document.getElementById(campo).classList.remove('text-danger');
+		document.getElementById(campo).classList.remove('border-danger');
+		document.getElementById(campo).classList.add('border-success');
+		document.getElementById(campo).classList.add('text-success');
+		/* document.querySelector(`#grupo__${campo} i`).classList.add('fa-check-circle');
+		document.querySelector(`#grupo__${campo} i`).classList.remove('fa-times-circle');
+		document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo'); */
+		campos[campo] = true;
+	} else {
+		document.getElementById(campo).classList.add('border-danger');
+		document.getElementById(campo).classList.add('text-danger');
+		document.getElementById(campo).classList.remove('text-success');
+		document.getElementById(campo).classList.remove('border-success');
+		/* document.querySelector(`#grupo__${campo} i`).classList.add('fa-times-circle');
+		document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle');
+		document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo'); */
+		campos[campo] = false;
+	}
+}
 
 newIntegrante.onclick = function(){
     console.log("click en agregar integrante (para agregar datos)");
-        
+    
     const   divAgregarI = document.createElement("div");
     const   labelNom= document.createElement("label");
     const   labelDni= document.createElement("label");
@@ -24,11 +72,13 @@ newIntegrante.onclick = function(){
     inputNom.setAttribute("type","text");
     inputNom.setAttribute("class","form-control");
     inputNom.setAttribute("id","nombre");
+    inputNom.setAttribute("name","nombre");
     inputNom.setAttribute("placeholder","Tal y como aparece en el documento");
 
     inputDni.setAttribute("type","text");
     inputDni.setAttribute("class","form-control");
     inputDni.setAttribute("id","dni");
+    inputDni.setAttribute("name","dni");
     inputDni.setAttribute("placeholder","XXXXXXXX");
 
     btnAgregar.setAttribute("id","agregar");
@@ -44,9 +94,17 @@ newIntegrante.onclick = function(){
 
     familiares.append(divAgregarI);
     const agregar = document.getElementById('agregar');
-    
+
+    const   inputsFam = document.querySelectorAll('#familiares input');
+
+    inputsFam.forEach((input) => {
+        input.addEventListener('keyup', validarDatos);
+        input.addEventListener('blur', validarDatos);
+    });
+
     agregar.onclick = function(){
-        console.log("click en agregar (datos ya cargados)");
+        if (campos.nombre && campos.dni){
+            console.log("click en agregar (datos ya cargados)");
         const nombre = inputNom.value;
         const dni = inputDni.value;
 
@@ -95,6 +153,29 @@ newIntegrante.onclick = function(){
         divPariente.setAttribute("id",dni);
 
         familiares.replaceChild(divPariente,divAgregarI)
+        }
+        else{
+            const noAgregado = document.createElement("div");
+            const close = document.createElement("button");
+            const span = document.createElement("span");
+
+            noAgregado.setAttribute("class", " alert alert-danger alert-dismissible fade show");
+            noAgregado.setAttribute("role", "alert");
+            close.setAttribute("type", "button");
+            close.setAttribute("class", "close");
+            close.setAttribute("data-dismiss", "alert");
+            close.setAttribute("aria-label", "Close");
+            span.setAttribute("aria-hidden", "true");
+
+            span.innerHTML ="&times;";
+            noAgregado.innerText ="Integrante no agregado, revise que todos los campos sean correctos";
+            
+            close.appendChild(span);
+            noAgregado.appendChild(close);
+
+            familiares.appendChild(noAgregado)
+        }
+        
     }
 };
 
