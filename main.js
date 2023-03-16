@@ -51,6 +51,7 @@ const validarCampo = (expresion, input, campo) => {
 }
 
 newIntegrante.onclick = function(){
+    newIntegrante.disabled = true;
     console.log("click en agregar integrante (para agregar datos)");
     
     const   divAgregarI = document.createElement("div");
@@ -61,7 +62,7 @@ newIntegrante.onclick = function(){
     const   btnAgregar = document.createElement("button");
 
     divAgregarI.setAttribute("id","agregarIntegrante");
-    divAgregarI.setAttribute("class","col-md-6 col-xl-4 p-2 border ronded-sm form-group");
+    divAgregarI.setAttribute("class","col-md-6 col-xl-4 p-2 border rounded form-group m-1");
 
     labelNom.setAttribute("for","nombre");
     labelNom.innerText = "Nombre Completo:";
@@ -83,7 +84,7 @@ newIntegrante.onclick = function(){
 
     btnAgregar.setAttribute("id","agregar");
     btnAgregar.setAttribute("type","button");
-    btnAgregar.setAttribute("class","btn btn-primary");
+    btnAgregar.setAttribute("class","btn btn-primary m-1");
     btnAgregar.innerText="Agregar";
 
     divAgregarI.appendChild(labelNom);
@@ -104,6 +105,9 @@ newIntegrante.onclick = function(){
 
     agregar.onclick = function(){
         if (campos.nombre && campos.dni){
+            campos.nombre = false;
+            campos.dni = false;
+            newIntegrante.disabled = false;
             console.log("click en agregar (datos ya cargados)");
         const nombre = inputNom.value;
         const dni = inputDni.value;
@@ -119,7 +123,7 @@ newIntegrante.onclick = function(){
 
         divPariente.setAttribute(
             "class",
-            "col-md-6 col-xl-4 p-2 border ronded-sm"
+            "col-md-6 col-xl-4 p-2 border rounded m-1"
         );
         divFrente.setAttribute("class", "custom-file mb-1");
         divDorso.setAttribute("class", "custom-file mb-1");
@@ -160,6 +164,7 @@ newIntegrante.onclick = function(){
             const span = document.createElement("span");
 
             noAgregado.setAttribute("class", " alert alert-danger alert-dismissible fade show");
+            noAgregado.setAttribute("id", " noAgregado");
             noAgregado.setAttribute("role", "alert");
             close.setAttribute("type", "button");
             close.setAttribute("class", "close");
