@@ -48,6 +48,12 @@ a.text-primary:focus, a.text-primary:hover {
     border-color: rgba(215,140,0,1);
 }
 
+.btn-primary:disabled {
+    background-color: rgba(67,23,90,1);
+    border-color: rgba(215,140,0,1);
+    opacity: .65;
+}
+
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
     background-color: rgba(67,23,90,1);
     border-color: rgba(215,140,0,1);
@@ -90,3 +96,16 @@ a:hover {
 @media (min-width: 768px) {
     html {
     font-size: 16px; } }
+
+
+.blink {
+        animation: blinking 0.05s 5;
+    }
+    
+@keyframes blinking {
+to {
+    color: white;
+    background-color: #db0000;
+    border: 1px solid #ffffff;
+    }
+}

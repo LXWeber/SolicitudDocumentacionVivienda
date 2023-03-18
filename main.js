@@ -4,7 +4,7 @@ const   newIntegrante = document.getElementById("btnAgregarIntegrante");
 const   familiares = document.getElementById("familiares");
 
 const regex = {
-	nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
+	nombre: /^[a-zA-ZÀ-ÿ\s]{2,50}$/,
     dni: /^\d{7,9}$/}
 
 const campos = {
@@ -34,27 +34,24 @@ const validarCampo = (expresion, input, campo) => {
 		document.getElementById(campo).classList.remove('border-danger');
 		document.getElementById(campo).classList.add('border-success');
 		document.getElementById(campo).classList.add('text-success');
-		/* document.querySelector(`#grupo__${campo} i`).classList.add('fa-check-circle');
-		document.querySelector(`#grupo__${campo} i`).classList.remove('fa-times-circle');
-		document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo'); */
 		campos[campo] = true;
 	} else {
 		document.getElementById(campo).classList.add('border-danger');
 		document.getElementById(campo).classList.add('text-danger');
 		document.getElementById(campo).classList.remove('text-success');
 		document.getElementById(campo).classList.remove('border-success');
-		/* document.querySelector(`#grupo__${campo} i`).classList.add('fa-times-circle');
-		document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle');
-		document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo'); */
 		campos[campo] = false;
 	}
 }
 
+/////////////////Boton Agregar Integrante DNI//////////////////////
 newIntegrante.onclick = function(){
+    let msjError = false
     newIntegrante.disabled = true;
     console.log("click en agregar integrante (para agregar datos)");
     
     const   divAgregarI = document.createElement("div");
+    const   divInterno = document.createElement("div");
     const   labelNom= document.createElement("label");
     const   labelDni= document.createElement("label");
     const   inputNom = document.createElement("input");
@@ -62,12 +59,16 @@ newIntegrante.onclick = function(){
     const   btnAgregar = document.createElement("button");
 
     divAgregarI.setAttribute("id","agregarIntegrante");
-    divAgregarI.setAttribute("class","col-md-6 col-xl-4 p-2 border rounded form-group m-1");
+    divAgregarI.setAttribute("class","col-md-6 col-xl-4");
+    
+    divInterno.setAttribute("class","p-2 border rounded form-group")
 
     labelNom.setAttribute("for","nombre");
+    labelNom.setAttribute("class","mb-0");
     labelNom.innerText = "Nombre Completo:";
 
     labelDni.setAttribute("for","dni");
+    labelDni.setAttribute("class","mb-0 mt-2");
     labelDni.innerText = "N° de DNI:";
 
     inputNom.setAttribute("type","text");
@@ -87,16 +88,17 @@ newIntegrante.onclick = function(){
     btnAgregar.setAttribute("class","btn btn-primary m-1");
     btnAgregar.innerText="Agregar";
 
-    divAgregarI.appendChild(labelNom);
-    divAgregarI.appendChild(inputNom);
-    divAgregarI.appendChild(labelDni);
-    divAgregarI.appendChild(inputDni);
-    divAgregarI.appendChild(btnAgregar);
+    divInterno.appendChild(labelNom);
+    divInterno.appendChild(inputNom);
+    divInterno.appendChild(labelDni);
+    divInterno.appendChild(inputDni);
+    divInterno.appendChild(btnAgregar);
+    divAgregarI.appendChild(divInterno);
 
     familiares.append(divAgregarI);
     const agregar = document.getElementById('agregar');
 
-    const   inputsFam = document.querySelectorAll('#familiares input');
+    const inputsFam = document.querySelectorAll('#familiares input');
 
     inputsFam.forEach((input) => {
         input.addEventListener('keyup', validarDatos);
@@ -104,70 +106,76 @@ newIntegrante.onclick = function(){
     });
 
     agregar.onclick = function(){
+        
         if (campos.nombre && campos.dni){
             campos.nombre = false;
             campos.dni = false;
             newIntegrante.disabled = false;
             console.log("click en agregar (datos ya cargados)");
-        const nombre = inputNom.value;
-        const dni = inputDni.value;
+            const nombre = inputNom.value;
+            const dni = inputDni.value;
 
-        const divPariente = document.createElement("div");
-        const pNomYDni = document.createElement("p");
-        const divFrente = document.createElement("div");
-        const divDorso = document.createElement("div");
-        const labelFrente = document.createElement("label");
-        const labelDorso = document.createElement("label");
-        const inputFrente = document.createElement("input");
-        const inputDorso = document.createElement("input");
+            const divPariente = document.createElement("div");
+            const divInterno = document.createElement("div");
+            const pNomYDni = document.createElement("p");
+            const divFrente = document.createElement("div");
+            const divDorso = document.createElement("div");
+            const labelFrente = document.createElement("label");
+            const labelDorso = document.createElement("label");
+            const inputFrente = document.createElement("input");
+            const inputDorso = document.createElement("input");
 
-        divPariente.setAttribute(
-            "class",
-            "col-md-6 col-xl-4 p-2 border rounded m-1"
-        );
-        divFrente.setAttribute("class", "custom-file mb-1");
-        divDorso.setAttribute("class", "custom-file mb-1");
+            divPariente.setAttribute("class","col-md-6 col-xl-4");
+            divFrente.setAttribute("class", "custom-file mb-1");
+            divDorso.setAttribute("class", "custom-file mb-1");
 
-        pNomYDni.setAttribute("class", "text-uppercase h6");
+            divInterno.setAttribute("class","p-2 border rounded form-group")
 
-        labelFrente.setAttribute("for", "dnititularfrente");
-        labelFrente.setAttribute("class", "custom-file-label");
-        labelFrente.innerText = "Frente";
+            pNomYDni.setAttribute("class", "text-uppercase h6");
 
-        labelDorso.setAttribute("class", "custom-file-label");
-        labelDorso.setAttribute("for", "dnititulardorso");
-        labelDorso.innerText = "Dorso";
+            labelFrente.setAttribute("for", "dnititularfrente");
+            labelFrente.setAttribute("class", "custom-file-label");
+            labelFrente.innerText = "Frente";
 
-        inputFrente.setAttribute("type", "file");
-        inputFrente.setAttribute("class", "custom-file-input");
+            labelDorso.setAttribute("class", "custom-file-label");
+            labelDorso.setAttribute("for", "dnititulardorso");
+            labelDorso.innerText = "Dorso";
 
-        inputDorso.setAttribute("type", "file");
-        inputDorso.setAttribute("class", "custom-file-input");
+            inputFrente.setAttribute("type", "file");
+            inputFrente.setAttribute("class", "custom-file-input");
+
+            inputDorso.setAttribute("type", "file");
+            inputDorso.setAttribute("class", "custom-file-input");
         
-        pNomYDni.innerText = nombre + ", "+ dni;
+            pNomYDni.innerText = nombre + ", "+dni+":";
 
-        divFrente.appendChild(labelFrente);
-        divFrente.appendChild(inputFrente);
-        divDorso.appendChild(inputDorso);
-        divDorso.appendChild(labelDorso);
-        divPariente.appendChild(pNomYDni);
-        divPariente.appendChild(divFrente);
-        divPariente.appendChild(divDorso);
+            divFrente.appendChild(labelFrente);
+            divFrente.appendChild(inputFrente);
+            divDorso.appendChild(inputDorso);
+            divDorso.appendChild(labelDorso);
+            divInterno.appendChild(pNomYDni);
+            divInterno.appendChild(divFrente);
+            divInterno.appendChild(divDorso);
+            divPariente.appendChild(divInterno);
+            
+            divPariente.setAttribute("id",dni);
 
-        divPariente.setAttribute("id",dni);
-
-        familiares.replaceChild(divPariente,divAgregarI)
+            familiares.replaceChild(divPariente,divAgregarI)
+            
+            if(msjError){familiares.removeChild(noAgregado)}
         }
-        else{
+        else if(!msjError){
+            msjError = true;
             const noAgregado = document.createElement("div");
             const close = document.createElement("button");
             const span = document.createElement("span");
 
-            noAgregado.setAttribute("class", " alert alert-danger alert-dismissible fade show");
-            noAgregado.setAttribute("id", " noAgregado");
+            noAgregado.setAttribute("class", "col-12 alert alert-danger alert-dismissible fade show");
+            noAgregado.setAttribute("id", "noAgregado");
             noAgregado.setAttribute("role", "alert");
             close.setAttribute("type", "button");
             close.setAttribute("class", "close");
+            close.setAttribute("id", "cerrarMensaje");
             close.setAttribute("data-dismiss", "alert");
             close.setAttribute("aria-label", "Close");
             span.setAttribute("aria-hidden", "true");
@@ -179,10 +187,18 @@ newIntegrante.onclick = function(){
             noAgregado.appendChild(close);
 
             familiares.appendChild(noAgregado)
+
+            document.getElementById('cerrarMensaje').addEventListener('click',function(){
+                msjError = false;
+            });
         }
-        
+        else{
+            noAgregado.classList.remove("blink");
+            void noAgregado.offsetWidth;
+            noAgregado.classList.add("blink");
+        };
     }
-};
+}
 
 formulario.addEventListener('submit', (e) =>{
     e.preventDefault();

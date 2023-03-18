@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="estilos.css">
 	<link href="https://fonts.googleapis.com/css?family=Dosis:semi-bold" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/1ad5c271c2.js"></script>
+	<script src="https://kit.fontawesome.com/1ad5c271c2.js" crossorigin="anonymous"></script>
 	<title>Solicitud de Documentación Nº1</title>
 </head>
 
@@ -26,7 +26,7 @@
 		</div>
 	</header>
 	<div class="container">
-		<div class="instrucciones border rounded-bottom">
+		<div class="instrucciones border border-top-0 rounded-bottom">
 			<h1 class="h2 text-center text-secondary text-uppercase">Solicitud de documentacion N°1</h1> <br>
 			<p>El plazo para ingresar la documentación es de 45 días contados a partir de que usted recibió el correo.
 				<br>
@@ -79,7 +79,7 @@
 					</a>
 				</div>
 				<div id="collapseTwo" class="collapse" data-parent="#accordion">
-					<div class="card-body">
+					<div class="card-body container">
 						<p>Adjuntar fotografia de DNI del titular y de <span class="text-danger h6">CADA MIEMBRO</span>
 							del grupo familiar (frente y dorso)</p>
 						<div class="alert alert-warning" role="alert">
@@ -87,7 +87,8 @@
 							extensiones .pdf, .jpg, .gif, .png.
 						</div>
 						<div id="familiares" class="row">
-							<div class="col-md-6 col-xl-4 p-2 border rounded m-1">
+							<div class="col-md-6 col-xl-4">
+							<div class="p-2 border rounded form-group">
 								<p class="text-uppercase h6">
 									<span class="badge badge-dark ">Titular</span> MARIA CELIA FERRARA, 23XXXXXX:
 								</p>
@@ -100,9 +101,10 @@
 									<label class="custom-file-label" for="dnititulardorso">Dorso</label>
 								</div>
 							</div>
+							</div>
 						</div>
 						<div class="row justify-content-end mr-1">
-							<input type="button" id="btnAgregarIntegrante" class="btn btn-outline-primary"
+							<input type="button" id="btnAgregarIntegrante" class="btn btn-primary"
 								value="Agregar Integrante">
 						</div>
 					</div>
@@ -115,9 +117,9 @@
 					</a>
 				</div>
 				<div id="collapseThree" class="collapse" data-parent="#accordion">
-					<div class="card-body">
+					<div class="card-body container">
 						<p>Adjunte fotografia de recibo de sueldo y/o declaración jurada de ingresos en caso de no tener
-							recibo de suelo <span class="text-danger h6">DE TODOS</span> los integrantes del grupo
+							recibo de sueldo <span class="text-danger h6">DE TODOS</span> los integrantes del grupo
 							familiar declarado que se encuentren con trabajo</p>
 						<div class="alert alert-info" role="alert">
 							<p class="h5 ">A tener en cuenta:</p>
@@ -139,9 +141,10 @@
 						<div class="alert alert-warning" role="alert">
 							Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 							extensiones .pdf, .jpg, .gif, .png.</div>
-						<div class="row d-flex">
-							<div class="col-md-6 col-xl-4 p-2 border ronded-sm">
-								<p class="text-uppercase h6 mt-3"><span class="badge badge-dark ">Titular</span> MARIA
+						<div class="row">
+							<div class="col-md-6 col-xl-4">
+							<div class="p-2 border rounded">
+								<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span> MARIA
 									CELIA FERRARA, 23XXXXXX:</p>
 								<div class="custom-file mb-1">
 									<input type="file" class="custom-file-input" id="ingresos">
@@ -156,55 +159,7 @@
 									<input type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
 								</div>
 							</div>
-							<div class="col-md-6 col-xl-4 p-2 border ronded-sm">
-								<p class="text-uppercase h6 mt-3">LEANDRO XAVIER WEBER, 37XXXXXX:</p>
-								<div class="custom-file mb-1">
-									<input type="file" class="custom-file-input" id="ingresos">
-									<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
-								</div>
-									<div class="custom-control custom-switch my-2">
-										<input type="checkbox" class="custom-control-input" id="switchInt1"
-											data-toggle="collapse" data-target="#ingresoint1">
-										<label class="custom-control-label" for="switchInt1">No corresponde.</label>
-									</div>
-								<div id="ingresoint1" class="collapse">
-									<input type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
-								</div>
 							</div>
-							<div class="col-md-6 col-xl-4 p-2 border ronded-sm">
-								<p class="text-uppercase h6 mt-3">GEORGE ENRIQUE WEBER, 12XXXXXX:</p>
-								<div class="custom-file mb-1">
-									<input type="file" class="custom-file-input" id="ingresos">
-									<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
-								</div>
-								<div class="custom-control custom-switch my-2">
-									<input type="checkbox" class="custom-control-input" id="switchInt2"
-										data-toggle="collapse" data-target="#ingresoint2">
-									<label class="custom-control-label" for="switchInt2">No corresponde.</label>
-								</div>
-								<div id="ingresoint2" class="collapse">
-									<input type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
-								</div>
-							</div>
-							<div class="col-md-6 col-xl-4 p-2 border ronded-sm">
-								<p class="text-uppercase h6 mt-3">ALEJANDRO ESTEBAN WEBER, 44XXXXXX:</p>
-								<div class="custom-file mb-1">
-									<input type="file" class="custom-file-input" id="ingresos">
-									<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
-								</div>
-								<div class="custom-control custom-switch my-2">
-									<input type="checkbox" class="custom-control-input" id="switchInt3"
-										data-toggle="collapse" data-target="#ingresoint3">
-									<label class="custom-control-label" for="switchInt3">No corresponde.</label>
-								</div>
-								<div id="ingresoint3" class="collapse">
-									<input type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
-								</div>
-							</div>
-						</div>
-						<div class="row justify-content-end mr-1">
-							<input type="button" name="btnAgregarIntegrante" class="btn btn-outline-primary"
-								value="Agregar Integrante">
 						</div>
 					</div>
 				</div>
@@ -382,10 +337,10 @@
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm" id="divUpload0">
-								<div class="row">
-									<div id="ingresos" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3"><span class="badge badge-dark ">Titular</span>
+							<div class="CampoForm row" id="divUpload0">
+								<div class="col-md-6 col-xl-4">
+									<div id="ingresos" class="p-2 border rounded">
+										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
 											MARIA CELIA FERRARA, 23XXXXXX:</p>
 										<div class="custom-file mb-1">
 											<input type="file" class="custom-file-input" id="ingresos">
@@ -403,61 +358,6 @@
 												placeholder="Motivo">
 										</div>
 									</div>
-									<div id="ingresos" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">LEANDRO XAVIER WEBER, 37XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="">
-											<label class="custom-file-label" for="">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchInt1resi"
-												data-toggle="collapse" data-target="#resiint1">
-											<label class="custom-control-label" for="switchInt1resi">No
-												corresponde.</label>
-										</div>
-										<div id="resiint1" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-									<div id="ingresos" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">GEORGE ENRIQUE WEBER, 12XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="">
-											<label class="custom-file-label" for="">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchInt2resi"
-												data-toggle="collapse" data-target="#resiint2">
-											<label class="custom-control-label" for="switchInt2resi">No
-												corresponde.</label>
-										</div>
-										<div id="resiint2" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-									<div id="ingresos" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">ALEJANDRO ESTEBAN WEBER, 44XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input">
-											<label class="custom-file-label">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchInt3resi"
-												data-toggle="collapse" data-target="#residenciaint3">
-											<label class="custom-control-label" for="switchInt3resi">No
-												corresponde.</label>
-										</div>
-										<div id="residenciaint3" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-								</div>
-								<div class="row justify-content-end mr-1">
-									<input type="button" name="btnAgregarIntegrante" class="btn btn-outline-primary"
-										value="Agregar Integrante">
 								</div>
 							</div>
 						</div>
@@ -489,10 +389,10 @@
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm" id="divUpload0">
-								<div class="row">
-									<div id="catastro" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3"><span class="badge badge-dark ">Titular</span>
+							<div class="CampoForm row" id="divUpload0">
+								<div class="col-md-6 col-xl-4">
+									<div id="catastro" class="p-2 border rounded">
+										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
 											MARIA CELIA FERRARA, 23XXXXXX:</p>
 										<div class="custom-file mb-1">
 											<input type="file" class="custom-file-input" id="catastro">
@@ -510,61 +410,6 @@
 												placeholder="Motivo">
 										</div>
 									</div>
-									<div id="catastro" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">LEANDRO XAVIER WEBER, 37XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="">
-											<label class="custom-file-label" for="">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchCata1"
-												data-toggle="collapse" data-target="#cata1">
-											<label class="custom-control-label" for="switchCata1">No
-												corresponde.</label>
-										</div>
-										<div id="cata1" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-									<div id="catastro" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">GEORGE ENRIQUE WEBER, 12XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="">
-											<label class="custom-file-label" for="">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchCata2"
-												data-toggle="collapse" data-target="#cata2">
-											<label class="custom-control-label" for="switchCata2">No
-												corresponde.</label>
-										</div>
-										<div id="cata2" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-									<div id="catastro" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">ALEJANDRO ESTEBAN WEBER, 44XXXXXX:</p>
-										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input">
-											<label class="custom-file-label">Buscar archivo/s</label>
-										</div>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchCata3"
-												data-toggle="collapse" data-target="#catastro3">
-											<label class="custom-control-label" for="switchCata3">No
-												corresponde.</label>
-										</div>
-										<div id="catastro3" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
-										</div>
-									</div>
-								</div>
-								<div class="row justify-content-end mr-1">
-									<input type="button" name="btnAgregarIntegrante" class="btn btn-outline-primary"
-										value="Agregar Integrante">
 								</div>
 							</div>
 						</div>
@@ -592,10 +437,10 @@
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm" id="divUpload0">
-								<div class="row">
-									<div id="discapacidad" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3"><span class="badge badge-dark ">Titular</span>
+							<div class="CampoForm row" id="divUpload0">
+								<div class="col-md-6 col-xl-4">
+									<div id="discapacidad" class="p-2 border rounded">
+										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
 											MARIA CELIA FERRARA, 23XXXXXX:</p>
 										<div class="custom-control custom-switch my-2">
 											<input type="checkbox" class="custom-control-input"
@@ -612,61 +457,11 @@
 											</div>
 										</div>
 									</div>
-									<div id="discapacidad" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">LEANDRO XAVIER WEBER, 37XXXXXX:</p>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchadisca1"
-												data-toggle="collapse" data-target="#disca1">
-											<label class="custom-control-label"
-												for="switchadisca1">¿Corresponde?</label>
-										</div>
-										<div id="disca1" class="collapse">
-											<div class="custom-file mb-1">
-												<input type="file" class="custom-file-input" id="discapacidad">
-												<label class="custom-file-label" for="discapacidad">Buscar
-													archivo/s</label>
-											</div>
-										</div>
-									</div>
-									<div id="discapacidad" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">GEORGE ENRIQUE WEBER, 12XXXXXX:</p>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchdisca2"
-												data-toggle="collapse" data-target="#disca2">
-											<label class="custom-control-label"
-												for="switchdisca2">¿Corresponde?</label>
-										</div>
-										<div id="disca2" class="collapse">
-											<div class="custom-file mb-1">
-												<input type="file" class="custom-file-input" id="discapacidad">
-												<label class="custom-file-label" for="discapacidad">Buscar
-													archivo/s</label>
-											</div>
-										</div>
-									</div>
-									<div id="discapacidad" class="col-md-6 col-xl-4 p-2 border ronded-sm">
-										<p class="text-uppercase h6 mt-3">ALEJANDRO ESTEBAN WEBER, 44XXXXXX:</p>
-										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input" id="switchdisca3"
-												data-toggle="collapse" data-target="#disca3">
-											<label class="custom-control-label"
-												for="switchdisca3">¿Corresponde?</label>
-										</div>
-										<div id="disca3" class="collapse">
-											<div class="custom-file mb-1">
-												<input type="file" class="custom-file-input" id="discapacidad">
-												<label class="custom-file-label" for="discapacidad">Buscar
-													archivo/s</label>
-											</div>
-										</div>
-									</div>
 								</div>
-								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			<div class="container">
 				<div class="row justify-content-end my-3">
 					<input type="submit" name="EnviarFormulario" class=" btn btn-success btn-lg"
@@ -692,7 +487,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"></script>
-		<script src="main.js"></script>
+			<script src="main.js"></script>
 </body>
 
 </html>
