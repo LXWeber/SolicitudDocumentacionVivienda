@@ -115,6 +115,10 @@ newIntegrante.onclick = function(){
             const dni = inputDni.value;
             
             familiares.replaceChild(dniDOM (nombre,dni),divAgregarI)
+            const keys = Object.keys(secciones);
+            for(let i=0; i<keys.length; i++){
+                document.getElementById((secciones[keys[i]])).appendChild(motivosDOM (nombre,dni,(secciones[keys[i]])));
+            }
             
             if(msjError){familiares.removeChild(noAgregado)}
         }
@@ -182,9 +186,11 @@ function dniDOM (nombre,dni){
     labelDorso.innerText = "Dorso";
 
     inputFrente.setAttribute("type", "file");
+    inputFrente.setAttribute("id", "dnititularfrente");
     inputFrente.setAttribute("class", "custom-file-input");
 
     inputDorso.setAttribute("type", "file");
+    inputDorso.setAttribute("id", "dnititulardorso");
     inputDorso.setAttribute("class", "custom-file-input");
 
     pNomYDni.innerText = nombre + ", "+dni+":";
@@ -204,44 +210,92 @@ function dniDOM (nombre,dni){
 }
 
 function motivosDOM(nombre,dni,seccion){
-    const divExterno = document.createElement()
-/*  <div class="col-md-6 col-xl-4">
-	    <div class="p-2 border rounded">
-			<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span> MARIA
-							CELIA FERRARA, 23XXXXXX:</p>
-						<div class="custom-file mb-1">
-										<input type="file" class="custom-file-input" id="fileIngr_23XXXXXX">
-										<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
-								</div>
-				<div class="custom-control custom-switch my-2">
-						<input type="checkbox" class="custom-control-input" id="checkIngresos_23XXXXXX" data-toggle="collapse"
-							data-target="#divMotIng_23XXXXXX">
-						<label class="custom-control-label" for="checkIngresos_23XXXXXX">No corresponde.</label>
-				</div>
-				<div id="divMotIng_23XXXXXX" class="collapse">
-							<input id="motIng_23XXXXXX" type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
-					</div>
-			</div>
-		</div> */
+    const divExterno = document.createElement("div");
+    const divInterno = document.createElement("div");
+    const pNomYDni = document.createElement("p");
+    const divFile = document.createElement("div");
+    const inputFile = document.createElement("input");
+    const labelFile = document.createElement("label");
+    const divCheck = document.createElement("div");
+    const inputCheck = document.createElement("input");
+    const labelCheck = document.createElement("label");
+    const divMoti = document.createElement("div");
+    const inputMoti = document.createElement("input");
+
+    divExterno.setAttribute("class","col-md-6 col-xl-4");
+    divInterno.setAttribute("class","p-2 border rounded");
+    pNomYDni.setAttribute("class","text-uppercase h6");
+
+    divFile.setAttribute("class","custom-file mb-1");
+    inputFile.setAttribute("class","custom-file-input");
+    inputFile.setAttribute("type","file");
+    inputFile.setAttribute("id","file_"+seccion+"_"+dni);
+    labelFile.setAttribute("class","custom-file-label");
+    labelFile.setAttribute("for","file_"+seccion+"_"+dni);
+
+    divCheck.setAttribute("class","custom-control custom-switch my-2");
+    inputCheck.setAttribute("class","custom-control-input");
+    inputCheck.setAttribute("type","checkbox");
+    inputCheck.setAttribute("id","check_"+seccion+"_"+dni);
+    inputCheck.setAttribute("data-toggle","collapse");
+    inputCheck.setAttribute("data-target","#divMot_"+seccion+"_"+dni);
+    labelCheck.setAttribute("for","check_"+seccion+"_"+dni);
+    labelCheck.setAttribute("class","custom-control-label");
+
+    divMoti.setAttribute("class","collapse");
+    divMoti.setAttribute("id","divMot_"+seccion+"_"+dni);
+    inputMoti.setAttribute("id","mot_"+seccion+"_"+dni);
+    inputMoti.setAttribute("type","text");
+    inputMoti.setAttribute("class","form-control form-control-sm mb-3");
+    inputMoti.setAttribute("placeholder","Motivo");
+
+    pNomYDni.innerText = nombre + ", "+dni+":";
+
+    divMoti.appendChild(inputMoti);
+    divCheck.appendChild(inputCheck);
+    divCheck.appendChild(labelCheck);
+    divFile.appendChild(inputFile);
+    divFile.appendChild(labelFile);
+    divInterno.appendChild(pNomYDni);
+    divInterno.appendChild(divFile);
+    divInterno.appendChild(divCheck);
+    divInterno.appendChild(divMoti);
+    divExterno.appendChild(divInterno);
+
+    return(divExterno);
 }
 
 const checkCorresponde = (e) =>{
     console.log(e.target.id);
-    if(e.target.id.startsWith("checkIngresos_")){
-        let dni = e.target.id.slice(14);
+    if(e.target.id.startsWith("check_")){
+        let arrayDni = e.target.id.match(/(\d)/g).join('');
+        let dni = arrayDni.toString();
+        const keys = Object.keys(secciones);
+        let seccion="";
+        for(let i=0; i<keys.length; i++){
+            if(e.target.id.includes(secciones[keys[i]])){
+                seccion = secciones[keys[i]];
+            }
+        }
         console.log(dni);
             if(e.target.checked){
-                document.getElementById("motIng_"+dni).disabled = false;
-                document.getElementById("motIng_"+dni).value = "";
-                document.getElementById("fileIngr_"+dni).disabled = true;
-                document.getElementById("fileIngr_"+dni).value = "";
+                document.getElementById("mot_"+seccion+"_"+dni).disabled = false;
+                document.getElementById("mot_"+seccion+"_"+dni).value = "";
+                document.getElementById("file_"+seccion+"_"+dni).disabled = true;
+                document.getElementById("file_"+seccion+"_"+dni).value = "";
             }else{
-                document.getElementById("motIng_"+dni).disabled = true;
-                document.getElementById("motIng_"+dni).value = "";
-                document.getElementById("fileIngr_"+dni).disabled = false;
-                document.getElementById("fileIngr_"+dni).value = "";
+                document.getElementById("mot_"+seccion+"_"+dni).disabled = true;
+                document.getElementById("mot_"+seccion+"_"+dni).value = "";
+                document.getElementById("file_"+seccion+"_"+dni).disabled = false;
+                document.getElementById("file_"+seccion+"_"+dni).value = "";
             }
     }
+}
+
+const secciones = {
+	1: "ingresos",
+	2: "residencia",
+	3: "catastro",
 }
 
 inputs.forEach((input) => {
