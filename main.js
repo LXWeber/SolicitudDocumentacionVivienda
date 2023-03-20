@@ -106,61 +106,15 @@ newIntegrante.onclick = function(){
     });
 
     agregar.onclick = function(){
-        
         if (campos.nombre && campos.dni){
             campos.nombre = false;
             campos.dni = false;
             newIntegrante.disabled = false;
-            console.log("click en agregar (datos ya cargados)");
+            
             const nombre = inputNom.value;
             const dni = inputDni.value;
-
-            const divPariente = document.createElement("div");
-            const divInterno = document.createElement("div");
-            const pNomYDni = document.createElement("p");
-            const divFrente = document.createElement("div");
-            const divDorso = document.createElement("div");
-            const labelFrente = document.createElement("label");
-            const labelDorso = document.createElement("label");
-            const inputFrente = document.createElement("input");
-            const inputDorso = document.createElement("input");
-
-            divPariente.setAttribute("class","col-md-6 col-xl-4");
-            divFrente.setAttribute("class", "custom-file mb-1");
-            divDorso.setAttribute("class", "custom-file mb-1");
-
-            divInterno.setAttribute("class","p-2 border rounded form-group")
-
-            pNomYDni.setAttribute("class", "text-uppercase h6");
-
-            labelFrente.setAttribute("for", "dnititularfrente");
-            labelFrente.setAttribute("class", "custom-file-label");
-            labelFrente.innerText = "Frente";
-
-            labelDorso.setAttribute("class", "custom-file-label");
-            labelDorso.setAttribute("for", "dnititulardorso");
-            labelDorso.innerText = "Dorso";
-
-            inputFrente.setAttribute("type", "file");
-            inputFrente.setAttribute("class", "custom-file-input");
-
-            inputDorso.setAttribute("type", "file");
-            inputDorso.setAttribute("class", "custom-file-input");
-        
-            pNomYDni.innerText = nombre + ", "+dni+":";
-
-            divFrente.appendChild(labelFrente);
-            divFrente.appendChild(inputFrente);
-            divDorso.appendChild(inputDorso);
-            divDorso.appendChild(labelDorso);
-            divInterno.appendChild(pNomYDni);
-            divInterno.appendChild(divFrente);
-            divInterno.appendChild(divDorso);
-            divPariente.appendChild(divInterno);
             
-            divPariente.setAttribute("id",dni);
-
-            familiares.replaceChild(divPariente,divAgregarI)
+            familiares.replaceChild(dniDOM (nombre,dni),divAgregarI)
             
             if(msjError){familiares.removeChild(noAgregado)}
         }
@@ -194,11 +148,105 @@ newIntegrante.onclick = function(){
         }
         else{
             noAgregado.classList.remove("blink");
-            void noAgregado.offsetWidth;
+            noAgregado.offsetWidth;
             noAgregado.classList.add("blink");
         };
     }
 }
+
+function dniDOM (nombre,dni){
+    const divPariente = document.createElement("div");
+    const divInterno = document.createElement("div");
+    const pNomYDni = document.createElement("p");
+    const divFrente = document.createElement("div");
+    const divDorso = document.createElement("div");
+    const labelFrente = document.createElement("label");
+    const labelDorso = document.createElement("label");
+    const inputFrente = document.createElement("input");
+    const inputDorso = document.createElement("input");
+
+    divPariente.setAttribute("class","col-md-6 col-xl-4");
+    divFrente.setAttribute("class", "custom-file mb-1");
+    divDorso.setAttribute("class", "custom-file mb-1");
+
+    divInterno.setAttribute("class","p-2 border rounded form-group")
+
+    pNomYDni.setAttribute("class", "text-uppercase h6");
+
+    labelFrente.setAttribute("for", "dnititularfrente");
+    labelFrente.setAttribute("class", "custom-file-label");
+    labelFrente.innerText = "Frente";
+
+    labelDorso.setAttribute("class", "custom-file-label");
+    labelDorso.setAttribute("for", "dnititulardorso");
+    labelDorso.innerText = "Dorso";
+
+    inputFrente.setAttribute("type", "file");
+    inputFrente.setAttribute("class", "custom-file-input");
+
+    inputDorso.setAttribute("type", "file");
+    inputDorso.setAttribute("class", "custom-file-input");
+
+    pNomYDni.innerText = nombre + ", "+dni+":";
+
+    divFrente.appendChild(labelFrente);
+    divFrente.appendChild(inputFrente);
+    divDorso.appendChild(inputDorso);
+    divDorso.appendChild(labelDorso);
+    divInterno.appendChild(pNomYDni);
+    divInterno.appendChild(divFrente);
+    divInterno.appendChild(divDorso);
+    divPariente.appendChild(divInterno);
+
+    divPariente.setAttribute("id",dni);
+
+    return(divPariente);
+}
+
+function motivosDOM(nombre,dni,seccion){
+    const divExterno = document.createElement()
+/*  <div class="col-md-6 col-xl-4">
+	    <div class="p-2 border rounded">
+			<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span> MARIA
+							CELIA FERRARA, 23XXXXXX:</p>
+						<div class="custom-file mb-1">
+										<input type="file" class="custom-file-input" id="fileIngr_23XXXXXX">
+										<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
+								</div>
+				<div class="custom-control custom-switch my-2">
+						<input type="checkbox" class="custom-control-input" id="checkIngresos_23XXXXXX" data-toggle="collapse"
+							data-target="#divMotIng_23XXXXXX">
+						<label class="custom-control-label" for="checkIngresos_23XXXXXX">No corresponde.</label>
+				</div>
+				<div id="divMotIng_23XXXXXX" class="collapse">
+							<input id="motIng_23XXXXXX" type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
+					</div>
+			</div>
+		</div> */
+}
+
+const checkCorresponde = (e) =>{
+    console.log(e.target.id);
+    if(e.target.id.startsWith("checkIngresos_")){
+        let dni = e.target.id.slice(14);
+        console.log(dni);
+            if(e.target.checked){
+                document.getElementById("motIng_"+dni).disabled = false;
+                document.getElementById("motIng_"+dni).value = "";
+                document.getElementById("fileIngr_"+dni).disabled = true;
+                document.getElementById("fileIngr_"+dni).value = "";
+            }else{
+                document.getElementById("motIng_"+dni).disabled = true;
+                document.getElementById("motIng_"+dni).value = "";
+                document.getElementById("fileIngr_"+dni).disabled = false;
+                document.getElementById("fileIngr_"+dni).value = "";
+            }
+    }
+}
+
+inputs.forEach((input) => {
+	input.addEventListener('click', checkCorresponde);
+});
 
 formulario.addEventListener('submit', (e) =>{
     e.preventDefault();
