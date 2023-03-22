@@ -112,11 +112,11 @@
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<a class="d-block collapsed card-link h5" data-toggle="collapse" href="#collapseThree">
+					<a class="d-block collapsed card-link h5" data-toggle="collapse" href="#collapseIngresos">
 						Ingresos
 					</a>
 				</div>
-				<div id="collapseThree" class="collapse" data-parent="#accordion">
+				<div id="collapseIngresos" class="collapse" data-parent="#accordion">
 					<div class="card-body container">
 						<p>Adjunte fotografia de recibo de sueldo y/o declaración jurada de ingresos en caso de no tener
 							recibo de sueldo <span class="text-danger h6">DE TODOS</span> los integrantes del grupo
@@ -143,7 +143,7 @@
 							extensiones .pdf, .jpg, .gif, .png.</div>
 						<div id="ingresos" class="row">
 							<div class="col-md-6 col-xl-4">
-								<div class="p-2 border rounded">
+								<div class="p-2 border rounded form-group">
 									<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span> MARIA
 										CELIA FERRARA, 23000000:</p>
 									<div class="custom-file mb-1">
@@ -151,9 +151,9 @@
 										<label class="custom-file-label" for="file_ingresos_23000000">Buscar archivo/s</label>
 									</div>
 									<div class="custom-control custom-switch my-2">
-										<input type="checkbox" class="custom-control-input" id="check_ingresos_resos_23000000" data-toggle="collapse"
+										<input type="checkbox" class="custom-control-input" id="check_ingresos_23000000" data-toggle="collapse"
 											data-target="#divMot_ingresos_23000000">
-										<label class="custom-control-label" for="check_ingresos_resos_23000000">No corresponde.</label>
+										<label class="custom-control-label" for="check_ingresos_23000000">No corresponde.</label>
 									</div>
 									<div id="divMot_ingresos_23000000" class="collapse">
 										<input id="mot_ingresos_23000000" type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
@@ -302,11 +302,11 @@
 					<div class="card-body">
 						<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" id="switchresidencia"
-								data-toggle="collapse" data-target="#residencia">
+								data-toggle="collapse" data-target="#residenciaCollapse">
 							<label class="custom-control-label mb-3" for="switchresidencia">¿Cumple con los 10 años
 								de residencia que establece la Ley?</label>
 						</div>
-						<div id="residencia" class="collapse mt-3">
+						<div id="residenciaCollapse" class="collapse mt-3">
 							<p>SI UD. O ALGUN INTEGRANTE DE SU GRUPO FAMILIAR MAYOR DE 18 AÑOS NO ES NACIDO EN SAN LUIS,
 								debe acreditar que vive en la Pcia. de San Luis desde hace 10 años o mas.</p>
 							<p><u>La única manera de acreditarlo es que adjunte fotografias de:</u>
@@ -336,25 +336,26 @@
 							</div>
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
-								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm row" id="divUpload0">
+								extensiones .pdf, .jpg, .gif, .png.
+							</div>
+							<div class="row" id="residencia">
 								<div class="col-md-6 col-xl-4">
-									<div  class="p-2 border rounded">
+									<div class="p-2 border rounded form-group">
 										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
 											MARIA CELIA FERRARA, 23XXXXXX:</p>
 										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="ingresos">
-											<label class="custom-file-label" for="ingresos">Buscar archivo/s</label>
+											<input type="file" class="custom-file-input" id="file_residencia_23000000">
+											<label class="custom-file-label" for="file_residencia_23000000">Buscar archivo/s</label>
 										</div>
 										<div class="custom-control custom-switch my-2">
 											<input type="checkbox" class="custom-control-input"
-												id="checkIngresosresi" data-toggle="collapse"
-												data-target="#resititu">
-											<label class="custom-control-label" for="checkIngresosresi">No
+												id="check_residencia_23000000" data-toggle="collapse"
+												data-target="#divMot_residencia_23000000">
+											<label class="custom-control-label" for="check_residencia_23000000">No
 												corresponde.</label>
 										</div>
-										<div id="resititu" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
+										<div id="divMot_residencia_23000000" class="collapse">
+											<input id="mot_residencia_23000000" type="text" class="form-control form-control-sm mb-3"
 												placeholder="Motivo">
 										</div>
 									</div>
@@ -374,11 +375,11 @@
 					<div class="card-body">
 						<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" id="switchcata"
-								data-toggle="collapse" data-target="#cata" aria-expanded="true">
+								data-toggle="collapse" data-target="#catastroCollapse" aria-expanded="true">
 							<label class="custom-control-label mb-3" for="switchcata">¿El titular o algun miembro es
 								nacido en otra provincia?</label>
 						</div>
-						<div id="cata" class="collapse mt-3">
+						<div id="catastroCollapse" class="collapse mt-3">
 							<p>Adjuntar fotografia de acreditación de libre catastro de la provincia de origen a todo
 								aquel mayor de 18 años que no es nacido en la provincia de San Luis</p>
 							<p>Todos los integrantes no nacidos en San Luis, deben acreditar que NO poseen propiedades
@@ -389,25 +390,22 @@
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm row" id="divUpload0">
+							<div class="CampoForm row" id="catastro">
 								<div class="col-md-6 col-xl-4">
-									<div id="catastro" class="p-2 border rounded">
-										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
-											MARIA CELIA FERRARA, 23XXXXXX:</p>
+									<div class="p-2 border rounded form-group">
+										<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span> MARIA
+											CELIA FERRARA, 23000000:</p>
 										<div class="custom-file mb-1">
-											<input type="file" class="custom-file-input" id="catastro">
-											<label class="custom-file-label" for="catastro">Buscar archivo/s</label>
+											<input type="file" class="custom-file-input" id="file_catastro_23000000">
+											<label class="custom-file-label" for="file_catastro_23000000">Buscar archivo/s</label>
 										</div>
 										<div class="custom-control custom-switch my-2">
-											<input type="checkbox" class="custom-control-input"
-												id="checkIngresoscata" data-toggle="collapse"
-												data-target="#catatitu">
-											<label class="custom-control-label" for="checkIngresoscata">No
-												corresponde.</label>
+											<input type="checkbox" class="custom-control-input" id="check_catastro_23000000" data-toggle="collapse"
+												data-target="#divMot_catastro_23000000">
+											<label class="custom-control-label" for="check_catastro_23000000">No corresponde.</label>
 										</div>
-										<div id="catatitu" class="collapse">
-											<input type="text" class="form-control form-control-sm mb-3"
-												placeholder="Motivo">
+										<div id="divMot_catastro_23000000" class="collapse">
+											<input id="mot_catastro_23000000" type="text" class="form-control form-control-sm mb-3" placeholder="Motivo">
 										</div>
 									</div>
 								</div>
@@ -439,7 +437,7 @@
 								extensiones .pdf, .jpg, .gif, .png.</div>
 							<div class="CampoForm row" id="divUpload0">
 								<div class="col-md-6 col-xl-4">
-									<div id="discapacidad" class="p-2 border rounded">
+									<div id="discapacidad" class="p-2 border rounded form-group">
 										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
 											MARIA CELIA FERRARA, 23XXXXXX:</p>
 										<div class="custom-control custom-switch my-2">

@@ -1,5 +1,5 @@
 const   formulario = document.getElementById('formulario');
-const   inputs = document.querySelectorAll('#formulario input');
+let   inputs = document.querySelectorAll('#formulario input');
 const   newIntegrante = document.getElementById("btnAgregarIntegrante");
 const   familiares = document.getElementById("familiares");
 
@@ -13,23 +13,18 @@ const campos = {
 }
 
 const validarDatos = (e) => {
-    console.log("Entra a validarDatos");
 	switch (e.target.name) {
 		case "nombre":
-            console.log("Entra a validarDatos case nombre");
 			validarCampo(regex.nombre, e.target, e.target.name);
 		break;
 		case "dni":
-            console.log("Entra a validarDatos case dni");
             validarCampo(regex.dni, e.target, e.target.name);
         break;
 	}
 }
 
 const validarCampo = (expresion, input, campo) => {
-    console.log("Entra a validarCampo");
 	if(expresion.test(input.value)){
-    console.log("Entra a validarCampo if");
 		document.getElementById(campo).classList.remove('text-danger');
 		document.getElementById(campo).classList.remove('border-danger');
 		document.getElementById(campo).classList.add('border-success');
@@ -48,7 +43,6 @@ const validarCampo = (expresion, input, campo) => {
 newIntegrante.onclick = function(){
     let msjError = false
     newIntegrante.disabled = true;
-    console.log("click en agregar integrante (para agregar datos)");
     
     const   divAgregarI = document.createElement("div");
     const   divInterno = document.createElement("div");
@@ -98,12 +92,7 @@ newIntegrante.onclick = function(){
     familiares.append(divAgregarI);
     const agregar = document.getElementById('agregar');
 
-    const inputsFam = document.querySelectorAll('#familiares input');
-
-    inputsFam.forEach((input) => {
-        input.addEventListener('keyup', validarDatos);
-        input.addEventListener('blur', validarDatos);
-    });
+    refreshInputs();
 
     agregar.onclick = function(){
         if (campos.nombre && campos.dni){
@@ -121,6 +110,8 @@ newIntegrante.onclick = function(){
             }
             
             if(msjError){familiares.removeChild(noAgregado)}
+            
+            refreshInputs();
         }
         else if(!msjError){
             msjError = true;
@@ -223,7 +214,7 @@ function motivosDOM(nombre,dni,seccion){
     const inputMoti = document.createElement("input");
 
     divExterno.setAttribute("class","col-md-6 col-xl-4");
-    divInterno.setAttribute("class","p-2 border rounded");
+    divInterno.setAttribute("class","p-2 border rounded form-group");
     pNomYDni.setAttribute("class","text-uppercase h6");
 
     divFile.setAttribute("class","custom-file mb-1");
@@ -250,6 +241,8 @@ function motivosDOM(nombre,dni,seccion){
     inputMoti.setAttribute("placeholder","Motivo");
 
     pNomYDni.innerText = nombre + ", "+dni+":";
+    labelCheck.innerText = "No corresponde.";
+    labelFile.innerText = "Buscar archivo/s";
 
     divMoti.appendChild(inputMoti);
     divCheck.appendChild(inputCheck);
@@ -266,7 +259,6 @@ function motivosDOM(nombre,dni,seccion){
 }
 
 const checkCorresponde = (e) =>{
-    console.log(e.target.id);
     if(e.target.id.startsWith("check_")){
         let arrayDni = e.target.id.match(/(\d)/g).join('');
         let dni = arrayDni.toString();
@@ -277,7 +269,6 @@ const checkCorresponde = (e) =>{
                 seccion = secciones[keys[i]];
             }
         }
-        console.log(dni);
             if(e.target.checked){
                 document.getElementById("mot_"+seccion+"_"+dni).disabled = false;
                 document.getElementById("mot_"+seccion+"_"+dni).value = "";
@@ -298,9 +289,16 @@ const secciones = {
 	3: "catastro",
 }
 
-inputs.forEach((input) => {
-	input.addEventListener('click', checkCorresponde);
-});
+window.onload = refreshInputs();
+
+function refreshInputs(){
+    inputs = document.querySelectorAll('#formulario input');
+    inputs.forEach((input) => {
+        input.addEventListener('keyup', validarDatos);
+        input.addEventListener('blur', validarDatos);
+        input.addEventListener('click', checkCorresponde);
+    });
+}
 
 formulario.addEventListener('submit', (e) =>{
     e.preventDefault();
