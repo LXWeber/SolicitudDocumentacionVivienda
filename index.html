@@ -390,7 +390,7 @@
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm row" id="catastro">
+							<div class="row" id="catastro">
 								<div class="col-md-6 col-xl-4">
 									<div class="p-2 border rounded form-group">
 										<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span> MARIA
@@ -417,42 +417,39 @@
 			<div class="card">
 				<div class="card-header">
 					<a class="d-block collapsed card-link h5" data-toggle="collapse" href="#collapseTen">
-						Dicapacidad
+						Discapacidad
 					</a>
 				</div>
 				<div id="collapseTen" class="collapse" data-parent="#accordion">
 					<div class="card-body">
 						<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" id="switchdisca"
-							data-toggle="collapse" data-target="#disca">
+							data-toggle="collapse" data-target="#switchDiscapacidad">
 							<label class="custom-control-label mb-3" for="switchdisca">¿Alguno de los integrantes de
 							su grupo familiar tiene discapacidad?</label>
 						</div>
-						<div id="disca" class="collapse">
+						<div id="switchDiscapacidad" class="collapse">
 							<p>Adjunte foto de certificado de CUD</p>
 							<div class="alert alert-danger" role="alert">SOLO SE INCORPORARAN AL LEGAJO LOS CERTIFICADOS
 								CUD, NO SE ACEPTAN CERTIFICADOS MEDICOS</div>
 							<div class="alert alert-warning" role="alert">
 								Los archivos deben tener un tamaño máximo de 6 MB y solo se aceptan archivos con las
 								extensiones .pdf, .jpg, .gif, .png.</div>
-							<div class="CampoForm row" id="divUpload0">
+							<div class="row" id="discapacidad">
 								<div class="col-md-6 col-xl-4">
-									<div id="discapacidad" class="p-2 border rounded form-group">
-										<p class="text-uppercase h6"><span class="badge badge-dark ">Titular</span>
-											MARIA CELIA FERRARA, 23XXXXXX:</p>
+									<div class="p-2 border rounded form-group">
+										<p class="text-uppercase h6"><span class="badge badge-dark">Titular</span>
+											MARIA CELIA FERRARA, 23000000:</p>
 										<div class="custom-control custom-switch my-2">
 											<input type="checkbox" class="custom-control-input"
-												id="switchtituladisca" data-toggle="collapse"
-												data-target="#discatitu">
+												id="check_discapacidad_23000000" data-toggle="collapse"
+												data-target="#divFile_discapacidad_23000000">
 											<label class="custom-control-label"
-												for="switchtituladisca">¿Corresponde?</label>
+												for="check_discapacidad_23000000">¿Corresponde?</label>
 										</div>
-										<div id="discatitu" class="collapse">
-											<div class="custom-file mb-1">
-												<input type="file" class="custom-file-input" id="discapacidad">
-												<label class="custom-file-label" for="discapacidad">Buscar
-													archivo/s</label>
-											</div>
+										<div id="divFile_discapacidad_23000000" class="collapse custom-file mb-1">
+											<input type="file" class="custom-file-input" id="file_discapacidad_23000000">
+											<label class="custom-file-label" for="file_discapacidad_23000000">Buscar archivo/s</label>
 										</div>
 									</div>
 								</div>

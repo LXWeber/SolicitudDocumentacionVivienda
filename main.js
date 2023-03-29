@@ -103,11 +103,12 @@ newIntegrante.onclick = function(){
             const nombre = inputNom.value;
             const dni = inputDni.value;
             
-            familiares.replaceChild(dniDOM (nombre,dni),divAgregarI)
+            familiares.replaceChild(dniDOM (nombre,dni,"dni"),divAgregarI)
             const keys = Object.keys(secciones);
             for(let i=0; i<keys.length; i++){
                 document.getElementById((secciones[keys[i]])).appendChild(motivosDOM (nombre,dni,(secciones[keys[i]])));
             }
+            document.getElementById("discapacidad").appendChild(discDOM(nombre,dni,"discapacidad"));
             
             if(msjError){familiares.removeChild(noAgregado)}
             
@@ -149,7 +150,7 @@ newIntegrante.onclick = function(){
     }
 }
 
-function dniDOM (nombre,dni){
+function dniDOM (nombre,dni,seccion){
     const divPariente = document.createElement("div");
     const divInterno = document.createElement("div");
     const pNomYDni = document.createElement("p");
@@ -168,20 +169,20 @@ function dniDOM (nombre,dni){
 
     pNomYDni.setAttribute("class", "text-uppercase h6");
 
-    labelFrente.setAttribute("for", "dnititularfrente");
+    labelFrente.setAttribute("for", "frente_"+seccion+"_"+dni);
     labelFrente.setAttribute("class", "custom-file-label");
     labelFrente.innerText = "Frente";
 
     labelDorso.setAttribute("class", "custom-file-label");
-    labelDorso.setAttribute("for", "dnititulardorso");
+    labelDorso.setAttribute("for", "dorso_"+seccion+"_"+dni);
     labelDorso.innerText = "Dorso";
 
     inputFrente.setAttribute("type", "file");
-    inputFrente.setAttribute("id", "dnititularfrente");
+    inputFrente.setAttribute("id", "frente_"+seccion+"_"+dni);
     inputFrente.setAttribute("class", "custom-file-input");
 
     inputDorso.setAttribute("type", "file");
-    inputDorso.setAttribute("id", "dnititulardorso");
+    inputDorso.setAttribute("id", "dorso_"+seccion+"_"+dni);
     inputDorso.setAttribute("class", "custom-file-input");
 
     pNomYDni.innerText = nombre + ", "+dni+":";
@@ -258,6 +259,56 @@ function motivosDOM(nombre,dni,seccion){
     return(divExterno);
 }
 
+function discDOM(nombre,dni,seccion){
+    const divExterno = document.createElement("div");
+    const divInterno = document.createElement("div");
+    const pNomYDni = document.createElement("p");
+
+    const divCheck = document.createElement("div");
+    const inputCheck = document.createElement("input");
+    const labelCheck = document.createElement("label");
+
+    const divFile = document.createElement("div");
+    const inputFile = document.createElement("input");
+    const labelFile = document.createElement("label");
+
+    divExterno.setAttribute("class","col-md-6 col-xl-4");
+    divInterno.setAttribute("class","p-2 border rounded form-group");
+    pNomYDni.setAttribute("class","text-uppercase h6");
+
+    divFile.setAttribute("class","collapse custom-file mb-1");
+    divFile.setAttribute("id","divFile_"+seccion+"_"+dni);
+    inputFile.setAttribute("class","custom-file-input");
+    inputFile.setAttribute("type","file");
+    inputFile.setAttribute("id","file_"+seccion+"_"+dni);
+    labelFile.setAttribute("class","custom-file-label");
+    labelFile.setAttribute("for","file_"+seccion+"_"+dni);
+
+    divCheck.setAttribute("class","custom-control custom-switch my-2");
+    inputCheck.setAttribute("class","custom-control-input");
+    inputCheck.setAttribute("type","checkbox");
+    inputCheck.setAttribute("id","check_"+seccion+"_"+dni);
+    inputCheck.setAttribute("data-toggle","collapse");
+    inputCheck.setAttribute("data-target","#divFile_"+seccion+"_"+dni);
+    labelCheck.setAttribute("for","check_"+seccion+"_"+dni);
+    labelCheck.setAttribute("class","custom-control-label");
+
+    pNomYDni.innerText = nombre + ", "+dni+":";
+    labelCheck.innerText = "¿Corresponde?";
+    labelFile.innerText = "Buscar archivo/s";
+
+    divCheck.appendChild(inputCheck);
+    divCheck.appendChild(labelCheck);
+    divFile.appendChild(inputFile);
+    divFile.appendChild(labelFile);
+    divInterno.appendChild(pNomYDni);
+    divInterno.appendChild(divCheck);
+    divInterno.appendChild(divFile);
+    divExterno.appendChild(divInterno);
+
+    return(divExterno);
+}
+
 const checkCorresponde = (e) =>{
     if(e.target.id.startsWith("check_")){
         let arrayDni = e.target.id.match(/(\d)/g).join('');
@@ -269,6 +320,13 @@ const checkCorresponde = (e) =>{
                 seccion = secciones[keys[i]];
             }
         }
+        if(e.target.id.includes("discapacidad")){
+            seccion = "discapacidad";
+        }
+        if(e.target.id.includes("dni")){
+            seccion = "dni";
+        }
+        if(seccion != "discapacidad"){
             if(e.target.checked){
                 document.getElementById("mot_"+seccion+"_"+dni).disabled = false;
                 document.getElementById("mot_"+seccion+"_"+dni).value = "";
@@ -280,6 +338,15 @@ const checkCorresponde = (e) =>{
                 document.getElementById("file_"+seccion+"_"+dni).disabled = false;
                 document.getElementById("file_"+seccion+"_"+dni).value = "";
             }
+        }else{
+            if(e.target.checked){
+                document.getElementById("file_"+seccion+"_"+dni).disabled = false;
+                document.getElementById("file_"+seccion+"_"+dni).value = "";
+            }else{
+                document.getElementById("file_"+seccion+"_"+dni).disabled = true;
+                document.getElementById("file_"+seccion+"_"+dni).value = "";
+            }
+        }
     }
 }
 
