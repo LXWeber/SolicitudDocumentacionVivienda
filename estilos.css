@@ -43,11 +43,6 @@ a.text-primary:focus, a.text-primary:hover {
     background-color: rgba(215,140,0,1)!important;
 }
 
-.btn-primary{
-    background-color: rgba(187,0,94,1);
-    border-color: rgba(215,140,0,1);
-}
-
 .btn-primary:disabled {
     background-color: rgba(67,23,90,1);
     border-color: rgba(215,140,0,1);
