@@ -44,80 +44,78 @@ const validarCampo = (expresion, input, campo) => {
     }
 };
 
-/////////////////Boton Agregar Integrante DNI//////////////////////
+function funcionAgregar() {
+    refreshInputs();
+    const dni = document.getElementById("dni").value;
+    const nombre = document.getElementById("nombre").value;
+    if (campos.nombre && campos.dni && !listaFamiliares.has(dni)) {
+        campos.nombre = false;
+        campos.dni = false;
+        newIntegrante.disabled = false;
+
+        listaFamiliares.set(dni, nombre);
+
+        familiares.replaceChild(dniDOM(nombre, dni, "dni"), document.getElementById("agregarIntegrante"));
+        const keys = Object.keys(secciones);
+        for (let i = 0; i < keys.length; i++) {
+            document
+                .getElementById(secciones[keys[i]])
+                .appendChild(motivosDOM(nombre, dni, secciones[keys[i]]));
+        }
+        document
+            .getElementById("discapacidad")
+            .appendChild(discDOM(nombre, dni, "discapacidad"));
+
+        if (msjError) {
+            familiares.removeChild(cartelError);
+            msjError = false;
+        }
+        maxIntegrantes--;
+        refreshInputs();
+    } else {
+        text =
+            "<h5>Integrante no agregado!</h5> Revise y tenga en cuenta lo siguiente:";
+        if (!campos.nombre) {
+            parpadear("nombre");
+            text +=
+                "<br />" +
+                " - El nombre debe ser mayor a 2 caracteres y no contener numeros";
+        }
+        if (!campos.dni) {
+            parpadear("dni");
+            text += "<br />" + " - El DNI debe ser de entre 7 u 8 cifras";
+        }
+
+        if (listaFamiliares.has(dni)) {
+            parpadear("dni");
+            text += "<br />" +
+                " - El N° de DNI corresponde a un integrante ya ingresado:"
+                + "<br />" + "> DNI: " + dni + " > Nombre: " + listaFamiliares.get(dni);
+        }
+
+        if (msjError) {
+            familiares.replaceChild(errorDOM(text), cartelError);
+        } else {
+            msjError = true;
+            familiares.appendChild(errorDOM(text));
+        }
+
+        parpadear("cartelError");
+
+        document
+            .getElementById("cerrarMensaje")
+            .addEventListener("click", function () {
+                msjError = false;
+            });
+    }
+}
+
 newIntegrante.onclick = function () {
     if (maxIntegrantes > 0) {
         newIntegrante.disabled = true;
 
-        familiares.append(agregarDOM());
-        const agregar = document.getElementById("agregar");
+        familiares.append(agregarDOM("", ""));
 
-        refreshInputs();
-
-        agregar.onclick = function () {
-            const dni = document.getElementById("dni").value;
-            const nombre = document.getElementById("nombre").value;
-            if (campos.nombre && campos.dni && !listaFamiliares.has(dni)) {
-                campos.nombre = false;
-                campos.dni = false;
-                newIntegrante.disabled = false;
-
-                listaFamiliares.set(dni,nombre);
-
-                familiares.replaceChild(dniDOM(nombre, dni, "dni"), document.getElementById("agregarIntegrante"));
-                const keys = Object.keys(secciones);
-                for (let i = 0; i < keys.length; i++) {
-                    document
-                        .getElementById(secciones[keys[i]])
-                        .appendChild(motivosDOM(nombre, dni, secciones[keys[i]]));
-                }
-                document
-                    .getElementById("discapacidad")
-                    .appendChild(discDOM(nombre, dni, "discapacidad"));
-
-                if (msjError) {
-                    familiares.removeChild(cartelError);
-                    msjError = false;
-                }
-                maxIntegrantes--;
-                refreshInputs();
-            } else {
-                text =
-                    "<h5>Integrante no agregado!</h5> Revise y tenga en cuenta lo siguiente:";
-                if (!campos.nombre) {
-                    parpadear("nombre");
-                    text +=
-                        "<br />" +
-                        " - El nombre debe ser mayor a 2 caracteres y no contener numeros";
-                }
-                if (!campos.dni) {
-                    parpadear("dni");
-                    text += "<br />" + " - El DNI debe ser de entre 7 u 8 cifras";
-                }
-
-                if(listaFamiliares.has(dni)){
-                    parpadear("dni");
-                    text +="<br />" +
-                    " - El N° de DNI corresponde a un integrante ya ingresado:"
-                    + "<br />"+"> DNI: "+dni+ " > Nombre: "+listaFamiliares.get(dni);
-                }
-
-                if (msjError) {
-                    familiares.replaceChild(errorDOM(text), cartelError);
-                } else {
-                    msjError = true;
-                    familiares.appendChild(errorDOM(text));
-                }
-
-                parpadear("cartelError");
-
-                document
-                    .getElementById("cerrarMensaje")
-                    .addEventListener("click", function () {
-                        msjError = false;
-                    });
-            }
-        };
     } else if (!msjError) {
         msjError = true;
         familiares.appendChild(
@@ -135,16 +133,29 @@ newIntegrante.onclick = function () {
     }
 };
 
-function parpadear(id){
-    document
-            .getElementById(id).classList.remove("blink");
-    document
-            .getElementById(id).offsetWidth;
-    document
-            .getElementById(id).classList.add("blink");
+function modificar(esto) {
+    let arrayDni = esto.id.match(/(\d)/g).join("");
+    let dni = arrayDni.toString();
+    let nombre = listaFamiliares.get(dni);
+    listaFamiliares.delete(dni);
+    newIntegrante.disabled = true;
+    familiares.replaceChild(agregarDOM(nombre, dni), document.getElementById(dni))
 }
 
-function agregarDOM(){
+function eliminar(esto) {
+
+}
+
+function parpadear(id) {
+    document
+        .getElementById(id).classList.remove("blink");
+    document
+        .getElementById(id).offsetWidth;
+    document
+        .getElementById(id).classList.add("blink");
+}
+
+function agregarDOM(nombre, dni) {
     const divAgregarI = document.createElement("div");
     const divInterno = document.createElement("div");
     const labelNom = document.createElement("label");
@@ -167,12 +178,14 @@ function agregarDOM(){
     labelDni.innerText = "N° de DNI:";
 
     inputNom.setAttribute("type", "text");
+    inputNom.setAttribute("value", nombre);
     inputNom.setAttribute("class", "form-control");
     inputNom.setAttribute("id", "nombre");
     inputNom.setAttribute("name", "nombre");
     inputNom.setAttribute("placeholder", "Tal y como aparece en el documento");
 
     inputDni.setAttribute("type", "text");
+    inputDni.setAttribute("value", dni);
     inputDni.setAttribute("class", "form-control");
     inputDni.setAttribute("id", "dni");
     inputDni.setAttribute("name", "dni");
@@ -181,6 +194,7 @@ function agregarDOM(){
     btnAgregar.setAttribute("id", "agregar");
     btnAgregar.setAttribute("type", "button");
     btnAgregar.setAttribute("class", "btn btn-primary m-1");
+    btnAgregar.setAttribute("onclick", "funcionAgregar()");
     btnAgregar.innerText = "Agregar";
 
     divInterno.appendChild(labelNom);
@@ -260,16 +274,18 @@ function dniDOM(nombre, dni, seccion) {
 
     pNomYDni.innerText = nombre + ", " + dni + ":";
 
-    divBtns.setAttribute("class","d-flex justify-content-end")
-    divBtns.setAttribute("role","group")
+    divBtns.setAttribute("class", "d-flex justify-content-end")
+    divBtns.setAttribute("role", "group")
 
-    btnModif.setAttribute("id", "modif");
+    btnModif.setAttribute("id", "modif_" + dni);
     btnModif.setAttribute("type", "button");
+    btnModif.setAttribute("onclick", "modificar(this)");
     btnModif.setAttribute("class", "btn btn-warning btn-sm m-1");
     btnModif.innerText = "Modificar";
 
-    btnEliminar.setAttribute("id", "eliminar");
+    btnEliminar.setAttribute("id", "eliminar_" + dni);
     btnEliminar.setAttribute("type", "button");
+    btnEliminar.setAttribute("onclick", "eliminar(this)");
     btnEliminar.setAttribute("class", "btn btn-danger btn-sm m-1");
     btnEliminar.innerText = "Eliminar";
 
