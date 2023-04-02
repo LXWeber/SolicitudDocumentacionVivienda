@@ -115,7 +115,7 @@ newIntegrante.onclick = function () {
         newIntegrante.disabled = true;
 
         familiares.append(agregarDOM("", ""));
-
+        refreshInputs();
     } else if (!msjError) {
         msjError = true;
         familiares.appendChild(
@@ -137,13 +137,53 @@ function modificar(esto) {
     let arrayDni = esto.id.match(/(\d)/g).join("");
     let dni = arrayDni.toString();
     let nombre = listaFamiliares.get(dni);
-    listaFamiliares.delete(dni);
-    newIntegrante.disabled = true;
-    familiares.replaceChild(agregarDOM(nombre, dni), document.getElementById(dni))
+    let advertencia = 
+    "CUIDADO!\n Esta acción eliminará los archivos subidos de a éste pariente en todas las secciones aunque no haga ninguna modificación\n "+
+    "Pariente a modificar: "+nombre+" "+dni+"\n"+
+    "Desea continuar continuar?";
+    if(confirm(advertencia)){
+        listaFamiliares.delete(dni);
+        newIntegrante.disabled = true;
+        document
+            .getElementById("ingresos")
+            .removeChild(document.getElementById("ingresos_" + dni));
+        document
+            .getElementById("residencia")
+            .removeChild(document.getElementById("residencia_" + dni));
+        document
+            .getElementById("catastro")
+            .removeChild(document.getElementById("catastro_" + dni));
+        document
+            .getElementById("discapacidad")
+            .removeChild(document.getElementById("discapacidad_" + dni));
+        familiares.replaceChild(agregarDOM(nombre, dni), document.getElementById(dni))
+    }
 }
 
 function eliminar(esto) {
-
+    let arrayDni = esto.id.match(/(\d)/g).join("");
+    let dni = arrayDni.toString();
+    let nombre = listaFamiliares.get(dni);
+    let advertencia = 
+    "CUIDADO!\n Esta acción eliminará los archivos subidos correspondientes a éste pariente en todas las secciones\n "+
+    "Pariente a eliminar: "+nombre+" "+dni+"\n"+
+    "Desea continuar continuar?";
+    if(confirm(advertencia)){
+        listaFamiliares.delete(dni);
+        familiares.removeChild(document.getElementById(dni));
+        document
+            .getElementById("ingresos")
+            .removeChild(document.getElementById("ingresos_" + dni));
+        document
+            .getElementById("residencia")
+            .removeChild(document.getElementById("residencia_" + dni));
+        document
+            .getElementById("catastro")
+            .removeChild(document.getElementById("catastro_" + dni));
+        document
+            .getElementById("discapacidad")
+            .removeChild(document.getElementById("discapacidad_" + dni));
+    }
 }
 
 function parpadear(id) {
@@ -320,6 +360,7 @@ function motivosDOM(nombre, dni, seccion) {
     const inputMoti = document.createElement("input");
 
     divExterno.setAttribute("class", "col-md-6 col-xl-4");
+    divExterno.setAttribute("id", seccion + "_" + dni);
     divInterno.setAttribute("class", "p-2 border rounded form-group");
     pNomYDni.setAttribute("class", "text-uppercase h6");
 
@@ -378,6 +419,7 @@ function discDOM(nombre, dni, seccion) {
     const labelFile = document.createElement("label");
 
     divExterno.setAttribute("class", "col-md-6 col-xl-4");
+    divExterno.setAttribute("id", seccion + "_" + dni);
     divInterno.setAttribute("class", "p-2 border rounded form-group");
     pNomYDni.setAttribute("class", "text-uppercase h6");
 
